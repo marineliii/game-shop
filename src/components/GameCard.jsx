@@ -1,10 +1,14 @@
 /* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
+import React from 'react';
 
-const GameCard = ({ game: { slug, released, background_image, name, parent_platforms } }) => {
+const GameCard = ({ game: { id, released, background_image, name, parent_platforms, rating } }) => {
     return (
-        <div className="game" key={slug}>
+        <div className="game" key={id}>
             <div>
-                <p>{released}</p>
+                <p>Released: {released}</p>
+                <p>Rating: {rating}</p>
+                <p>Max Rating: 5</p>
             </div>
 
             <div>
@@ -12,7 +16,7 @@ const GameCard = ({ game: { slug, released, background_image, name, parent_platf
             </div>
 
             <div>
-                <span>{parent_platforms}</span>
+                <span>{parent_platforms.map(platform => platform.platform.name).join(', ')}</span>
                 <h3>{name}</h3>
             </div>
         </div>
