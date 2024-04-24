@@ -18,8 +18,8 @@ const App = () => {
   const fetchGames = async () => {
     const response = await fetch(`${API_URL}&search=${searchTerm}&page=${pageNumber}`);
     const data = await response.json();
-    setGames([...games, ...data.results]);
-    setTotalPages(data.total_pages);
+    setGames(data.results || []);
+    setTotalPages(data.total_pages || 0);
   };
 
   const loadMoreGames = () => {
@@ -33,41 +33,43 @@ const App = () => {
       const response = await fetch(`${API_URL}&page=${pageNumber}&dates=1990-01-01,2019-12-31&ordering=-rating`);
       const data = await response.json();
       setGames(data.results || []);
-      setTotalPages(data.total_pages);
+      setTotalPages(data.total_pages || 0);
       setPageNumber(1);
     } else {
       const response = await fetch(`${API_URL}&page=${pageNumber}&dates=${year}-01-01,${year}-12-31&ordering=-rating`);
       const data = await response.json();
       setGames(data.results || []);
-      setTotalPages(data.total_pages);
+      setTotalPages(data.total_pages || 0);
       setPageNumber(1);
     }
+  };
 
+  const searchGames = async (name) => {
+    setSearchTerm(name); // Update the search term state
+    setPageNumber(1); // Reset page number when performing a new search
   };
 
   useEffect(() => {
     fetchGames();
-  }, [searchTerm, pageNumber]);
-
-  const searchGames = async (name) => {
-    const response = await fetch(`${API_URL}&search=${name}`);
-    const data = await response.json();
-    setGames(data.results || []);
-  };
+  }, [searchTerm, pageNumber]); // Include pageNumber in the dependencies array
 
   useEffect(() => {
-    searchGames('');
+    searchGames(''); // Initial search with empty string
   }, []);
 
-  const resetContent = () => {
-    searchGames('');
+  const resetContent = async () => {
+    setSearchTerm(''); // Reset search term to empty string
+    setPageNumber(1); // Reset page number 
+    searchGames(''); // Perform search with empty string to reset the game list
+    await fetchGames();
   };
 
   const toggleMenu = () => {
     setOpenMenu(!openMenu);
     console.log('clicked');
-
   }
+
+
 
   return (
     <div className="app">
@@ -82,7 +84,7 @@ const App = () => {
         <img
           src="https://raw.githubusercontent.com/gist/adrianhajdin/997a8cdf94234e889fa47be89a4759f1/raw/f13e5a9a0d1e299696aa4a0fe3a0026fa2a387f7/search.svg"
           alt="search"
-          onClick={fetchGames}
+          onClick={fetchGames} // Change to fetchGames for search functionality
         />
       </div>
 

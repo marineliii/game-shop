@@ -16,7 +16,9 @@ const GameCard = ({ game: { id, released, background_image, name, parent_platfor
             </div>
 
             <div>
-                <span>{parent_platforms.map(platform => platform.platform.name).join(', ')}</span>
+                <span>
+                    {parent_platforms && parent_platforms.map(platform => platform.platform.name).join(', ')}
+                </span>
                 <h3>{name}</h3>
             </div>
         </div>
@@ -24,3 +26,4 @@ const GameCard = ({ game: { id, released, background_image, name, parent_platfor
 }
 
 export default GameCard;
+
