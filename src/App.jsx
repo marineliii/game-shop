@@ -45,22 +45,22 @@ const App = () => {
   };
 
   const searchGames = async (name) => {
-    setSearchTerm(name); // Update the search term state
-    setPageNumber(1); // Reset page number when performing a new search
+    setSearchTerm(name);
+    setPageNumber(1);
   };
 
   useEffect(() => {
-    fetchGames();
-  }, [searchTerm, pageNumber]); // Include pageNumber in the dependencies array
+    fetchGames()
+  }, [searchTerm, pageNumber]);
 
   useEffect(() => {
-    searchGames(''); // Initial search with empty string
+    searchGames('');
   }, []);
 
   const resetContent = async () => {
-    setSearchTerm(''); // Reset search term to empty string
-    setPageNumber(1); // Reset page number 
-    searchGames(''); // Perform search with empty string to reset the game list
+    setSearchTerm('');
+    setPageNumber(1);
+    searchGames('');
     await fetchGames();
   };
 
@@ -84,9 +84,10 @@ const App = () => {
         <img
           src="https://raw.githubusercontent.com/gist/adrianhajdin/997a8cdf94234e889fa47be89a4759f1/raw/f13e5a9a0d1e299696aa4a0fe3a0026fa2a387f7/search.svg"
           alt="search"
-          onClick={fetchGames} // Change to fetchGames for search functionality
+          onClick={fetchGames}
         />
       </div>
+
 
       <div className="container">
         {games?.length > 0 ? (
@@ -103,6 +104,7 @@ const App = () => {
           </button>
         )}
       </div>
+
       <SideMenuBar years={years} onClick={handleYearClick} />
       <HamburgerMenuItem onClick={toggleMenu} />
     </div>
