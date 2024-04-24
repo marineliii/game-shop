@@ -11,7 +11,7 @@ const SideMenuBar = ({ years, onClick }) => {
     };
 
     return (
-        <div className={`side-menu-bar ${menuOpen ? 'open' : ''}`}>
+        <div className={`side-menu-bar ${menuOpen ? 'open' : 'hidden'}`}>
             <div className="hamburger-icon" onClick={toggleMenu}>
                 <div></div>
                 <div></div>

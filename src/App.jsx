@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import GameCard from './components/GameCard';
 import SideMenuBar from './components/SideMenuBar';
+import HamburgerMenuItem from './components/HamburgerMenu';
 
 const API_URL = 'https://api.rawg.io/api/games?key=ea06f9ea28e846c6b4011bef946342d7';
 
@@ -12,6 +13,7 @@ const App = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [pageNumber, setPageNumber] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const [openMenu, setOpenMenu] = useState(false);
 
   const fetchGames = async () => {
     const response = await fetch(`${API_URL}&search=${searchTerm}&page=${pageNumber}`);
@@ -61,6 +63,12 @@ const App = () => {
     searchGames('');
   };
 
+  const toggleMenu = () => {
+    setOpenMenu(!openMenu);
+    console.log('clicked');
+
+  }
+
   return (
     <div className="app">
       <h1 onClick={resetContent}>Gaming World</h1>
@@ -93,8 +101,8 @@ const App = () => {
           </button>
         )}
       </div>
-
       <SideMenuBar years={years} onClick={handleYearClick} />
+      <HamburgerMenuItem onClick={toggleMenu} />
     </div>
   );
 };

@@ -1,0 +1,41 @@
+.hamburger-icon {
+  display: none;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 30px;
+  height: 20px;
+  cursor: pointer;
+  z-index: 1100;
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+.hamburger-icon div {
+  width: 100%;
+  height: 3px;
+  background-color: #fff;
+  margin: 5px 0;
+  transition: transform 0.3s ease;
+  background-color: goldenrod;
+}
+
+/* Styles for active state of hamburger icon (open state) */
+.hamburger-icon.active div:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger-icon.active div:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-icon.active div:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 768px) {
+  .hamburger-icon {
+    display: block; /* Display the hamburger icon on smaller screens */
+  }
+}
